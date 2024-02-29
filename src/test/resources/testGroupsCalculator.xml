@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Calculator group Suite">
+    <test name="Group functional Testing">
+        <groups>
+            <define name="Smoke">
+                <include name="general"/>
+            </define>
+            <define name="Extended Path">
+                <include name="extended"/>
+            </define>
+            <run>
+                <include name="Smoke"/>
+                <include name="Extended Path"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="CalculatorFunctionalTest"/>
+        </classes>
+    </test>
+</suite>
