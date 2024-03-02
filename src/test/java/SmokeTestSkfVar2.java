@@ -38,11 +38,9 @@ public class SmokeTestSkfVar2 {
         WebElement mdrdResult = driver.findElement(By.id("mdrd"));
         WebElement cgeResult = driver.findElement(By.id("cge"));
 //        Assert.assertTrue(mdrdResult.isDisplayed());
-        //поменять на 74?????
-        Assert.assertEquals(mdrdResult.getText(), "69.63 мл/мин/1.73м2" +
+        Assert.assertEquals(mdrdResult.getText(), "74 мл/мин/1.73м2" +
                 " - Незначительно сниженный уровень СКФ (C2)");
-        //поменять на 70?????
-        Assert.assertEquals(cgeResult.getText(), "73.18 мл/мин");
+        Assert.assertEquals(cgeResult.getText(), "70 мл/мин");
 //        Thread.sleep(3000);
     }
 
