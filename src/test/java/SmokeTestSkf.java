@@ -47,7 +47,7 @@ public class SmokeTestSkf {
 //        Assert.assertEquals(actualMdrdResult, "69.63 мл/мин/1.73м" + 2); // Positive , if +(char)178 isnt passed
         Assert.assertEquals(actualMdrdResult, "74 мл/мин/1.73м" + 2); //Negative - as in presentation
         Assert.assertEquals(mdrdDiagnosis.getText(), "Незначительно сниженный уровень СКФ (C2)");
-        Assert.assertEquals(actualCgeResult, "73.18 мл/мин"); //Positive
+//        Assert.assertEquals(actualCgeResult, "73.18 мл/мин"); //Positive
         Assert.assertEquals(actualCgeResult, "70 мл/мин"); // Negative - as in presentation
 //        Thread.sleep(3000);
     }
