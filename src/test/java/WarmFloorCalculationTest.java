@@ -26,7 +26,7 @@ public class WarmFloorCalculationTest {
     @Test
     public void cablePowerCalculationTest() throws InterruptedException {
         driver.get("https://kermi-fko.ru/raschety/Calc-Rehau-Solelec.aspx");
-        Thread.sleep(2000); // leave this!!
+        Thread.sleep(2000);
         WebElement floorWidth = driver.findElement(By.id("el_f_width"));
         floorWidth.sendKeys("4");
         WebElement floorLength = driver.findElement(By.id("el_f_lenght"));
@@ -41,11 +41,10 @@ public class WarmFloorCalculationTest {
         heatLoss.sendKeys("1568");
         WebElement buttonCalculate = driver.findElement(By.className("buttHFcalc"));
         buttonCalculate.click();
-        Thread.sleep(3000); //leave this!!
+//        Thread.sleep(2000);
         WebElement cablePowerField = driver.findElement(By.id("floor_cable_power"));
-//        System.out.println(cablePowerField.getAttribute("value"));
-        Assert.assertEquals(cablePowerField.getAttribute("value"), "873");
-//        Assert.assertEquals(cablePowerField.getText(), "873"); // Actual   : ничего ,
+        Assert.assertEquals(cablePowerField.getAttribute("value"), "873");  //passed
+//        Assert.assertEquals(cablePowerField.getText(), "873"); // Actual   :  null
 //        Thread.sleep(2000);
 
     }
@@ -67,11 +66,10 @@ public class WarmFloorCalculationTest {
         heatLoss.sendKeys("1568");
         WebElement buttonCalculate = driver.findElement(By.className("buttHFcalc"));
         buttonCalculate.click();
-        Thread.sleep(3000); //leave this!!
+//        Thread.sleep(2000);
         WebElement specifCablePowerField = driver.findElement(By.id("spec_floor_cable_power"));
-//        System.out.println(specifCablePowerField.getAttribute("value"));
-        Assert.assertEquals(specifCablePowerField.getAttribute("value"), "44");
-//        Assert.assertEquals(specifCablePowerField.getText(), 44); // актуал резалт - ничего, на хтмл этого текста нет
+        Assert.assertEquals(specifCablePowerField.getAttribute("value"), "44"); //passed
+//        Assert.assertEquals(specifCablePowerField.getText(), 44); // Actual   :  null
 //        Thread.sleep(2000);
 
     }
