@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parameters Suite">
+    <parameter name="dividend-value" value="18.325"/>
+    <parameter name="divisor-value" value="6"/>
+    <parameter name="quotient-expected-value" value="3.0541666666666667"/>
+    <test name="Custom param tests">
+        <classes>
+            <class name="CalculatorFunctionalTest">
+                <methods>
+                    <include name="doubleDivInteger"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -1,5 +1,7 @@
 import data.*;
 import org.testng.Assert;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class CalculatorFunctionalTest extends BaseCalcTest {
@@ -53,14 +55,15 @@ public class CalculatorFunctionalTest extends BaseCalcTest {
         Assert.assertEquals(calculator.div(a, b), expected);
     }
 
-    @Test(testName = "Integer by double", dependsOnGroups = "extended")
+    @Test(testName = "Integer by double", description = "to validate division Integer by Double", dependsOnGroups = "extended")
     public void intDivDouble() {
         Assert.assertEquals(calculator.div(5, 2.15), 2.3255813953488373);
     }
 
+    @Parameters({"dividend-value", "divisor-value", "quotient-expected-value"})
     @Test(testName = "Double by int", priority = 1)
-    public void doubleDivInteger() {
-        Assert.assertEquals(calculator.div(18.325, 6), 3.0541666666666667);
+    public void doubleDivInteger(@Optional("54.9812923") double dividend, @Optional("9") int divisor, @Optional("6.109032477777777") double quotient) {
+        Assert.assertEquals(calculator.div(dividend, divisor), quotient);
 
     }
 
@@ -68,6 +71,11 @@ public class CalculatorFunctionalTest extends BaseCalcTest {
     // специально задизебленный неверный тест
     public void doubleZeroZero() {
         Assert.assertEquals(calculator.div(0.0, 0.0), 0.0);
+    }
+
+    @Test(testName = "test with retryAnalyzer", retryAnalyzer = Retry.class)
+    public void retryTest() {
+        Assert.assertEquals(calculator.div(60, 3), 21);
     }
 
 }

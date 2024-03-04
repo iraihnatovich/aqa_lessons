@@ -1,12 +1,16 @@
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeSuite;
 
-public class BaseCalcTest  {
-//    protected Calculator  calculator ;
-    protected Calculator  calculator = new Calculator(); //вынесла сюда, ибо если иниц в @BeforeSuite ---> NUllPointerExc при запуске группы
+public class BaseCalcTest {
+    protected Calculator calculator;
 
-//    @BeforeSuite(groups = {"general", "extended"})
     @BeforeSuite
-    public void initCalculator(){
-//        calculator = new Calculator();
+    public void initCalculator() {
+        calculator = new Calculator();
+    }
+
+    @BeforeGroups(groups = {"general", "extended"})
+    public void methodBeforeGeneral() {
+        calculator = new Calculator();
     }
 }
