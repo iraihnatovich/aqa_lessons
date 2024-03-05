@@ -36,11 +36,12 @@ public class LaminateTest {
         WebElement selectDropdown = driver.findElement(By.id("laying_method_laminate"));
         Select dropDirection = new Select(selectDropdown);
         dropDirection.selectByIndex(2); //с использованием отрезанного элемента
+        Thread.sleep(3000);
         WebElement directionFloor = driver.findElement(By.id("direction-laminate-id1"));
-        directionFloor.sendKeys(Keys.ENTER); // click() , submit() не работает здесь , sendKeys(Keys.ENTER) не измен значение
+        directionFloor.click();
         WebElement calculationBtn = driver.findElement(By.className("calc-btn"));
         calculationBtn.click();
-//       driver.switchTo().frame(); // не могу найти элем, на который переключится при появл поп-апа
+        Thread.sleep(4000);
         WebElement calculatePlankAmount = driver.findElement(By.xpath("//*[@id=\"t3-content\"]/div[3]/article/section/div[2]/div[3]/div[2]/div[1]"));
         WebElement calculatePackAmount = driver.findElement(By.xpath("//*[@id=\"t3-content\"]/div[3]/article/section/div[2]/div[3]/div[2]/div[2]"));
         Assert.assertEquals(calculatePlankAmount.getText(), "Требуемое количество досок ламината: 53");

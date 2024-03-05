@@ -14,8 +14,6 @@ public class SmokeTestSkf {
     @BeforeMethod
     public void setupBrowser() {
         driver = new BrowserService().getDriver();
-
-
     }
 
     @Test
@@ -37,19 +35,11 @@ public class SmokeTestSkf {
 //        WebElement calculBtn = driver.findElement(By.name("Рассчитать")); // not found
         WebElement calculBtn = driver.findElement(By.xpath("//*[@id=\"input-data\"]/p[7]/button"));
         calculBtn.click();
-        WebElement mdrdNumberResult = driver.findElement(By.id("mdrd_res"));
-        WebElement mdrdDescrResult = driver.findElement(By.xpath("//*[@id=\"mdrd\"]/p/i"));
-        WebElement mdrdDiagnosis = driver.findElement(By.xpath("//*[@id=\"mdrd\"]/p/span"));
-        String actualMdrdResult = mdrdNumberResult.getText() + " " + mdrdDescrResult.getText();
-        WebElement cgeNumberResult = driver.findElement(By.id("cge_res"));
-        WebElement cgeDescrResult = driver.findElement(By.xpath("//*[@id=\"cge\"]/p/i"));
-        String actualCgeResult = cgeNumberResult.getText() + " " + cgeDescrResult.getText();
-//        Assert.assertEquals(actualMdrdResult, "69.63 мл/мин/1.73м" + 2); // Positive , if +(char)178 isnt passed
-        Assert.assertEquals(actualMdrdResult, "74 мл/мин/1.73м" + 2); //Negative - as in presentation
-        Assert.assertEquals(mdrdDiagnosis.getText(), "Незначительно сниженный уровень СКФ (C2)");
-//        Assert.assertEquals(actualCgeResult, "73.18 мл/мин"); //Positive
-        Assert.assertEquals(actualCgeResult, "70 мл/мин"); // Negative - as in presentation
-//        Thread.sleep(3000);
+        WebElement mdrdResult = driver.findElement(By.id("mdrd"));
+        WebElement cgeResult = driver.findElement(By.id("cge"));
+        Thread.sleep(2000);
+        Assert.assertEquals(mdrdResult.getText().trim(), "74 мл/мин/1.73м2 - Незначительно сниженный уровень СКФ (C2)");
+        Assert.assertEquals(cgeResult.getText().trim(), "70 мл/мин");
     }
 
     @AfterMethod
