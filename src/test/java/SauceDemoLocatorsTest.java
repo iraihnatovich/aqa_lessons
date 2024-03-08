@@ -30,7 +30,7 @@ public class SauceDemoLocatorsTest {
     }
 
     @Test(testName = "Footer presence")
-    public void hasFooterTest() { //or select dropdown??????
+    public void hasFooterTest() {
         Assert.assertTrue(driver.findElement(By.tagName("footer")).isDisplayed());
     }
 
@@ -72,7 +72,7 @@ public class SauceDemoLocatorsTest {
     }
 
     @Test(testName = "Social links list")
-    public void footerLinksTest() { //different????
+    public void footerLinksTest() {
         Assert.assertTrue(driver.findElement(By.xpath("//a/ancestor::ul")).isDisplayed());
     }
 
