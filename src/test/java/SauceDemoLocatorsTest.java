@@ -11,7 +11,7 @@ public class SauceDemoLocatorsTest {
     private WebDriver driver;
 
     @BeforeMethod
-    public void setupBrowser() throws InterruptedException {
+    public void setup() throws InterruptedException {
         driver = new BrowserService().getDriver();
         driver.get(ReadProperties.getUrl());
         Thread.sleep(2000);
@@ -57,8 +57,8 @@ public class SauceDemoLocatorsTest {
         Assert.assertTrue(driver.findElement(By.cssSelector("[class~='checkout_button']")).isDisplayed());
     }
 
-    @Test (testName = "Item page view")
-    public void singleItemPageTest(){
+    @Test(testName = "Item page view")
+    public void singleItemPageTest() {
         driver.findElement(By.xpath("//a[@id='item_0_title_link']")).click();
         Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Sauce Labs Bike Light']")).isDisplayed());
         Assert.assertEquals(driver.findElement(By.xpath("//div[contains(text(), 'A red light')]")).getText(), "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.");
@@ -66,20 +66,33 @@ public class SauceDemoLocatorsTest {
         Assert.assertTrue(driver.findElement(By.xpath("//div/descendant::img[@class='bm-icon']")).isDisplayed());
     }
 
-    @Test (testName = "DropDown presence")
-    public void dropDownTest(){
-        Assert.assertTrue(driver.findElement(By.xpath("//option/parent::select")).isDisplayed()); //maybe smth different?????
-// //button[contains(@id, 'remove')]/ancestor::div[@class="inventory_item"]
+    @Test(testName = "DropDown presence")
+    public void dropDownTest() {
+        Assert.assertTrue(driver.findElement(By.xpath("//option/parent::select")).isDisplayed());
     }
 
-    @Test (testName = "Social links list")
-    public void footerLinksTest(){ //different????
+    @Test(testName = "Social links list")
+    public void footerLinksTest() { //different????
         Assert.assertTrue(driver.findElement(By.xpath("//a/ancestor::ul")).isDisplayed());
     }
 
-    // //div[@class='cart_item']/following::button[contains(@id, 'remove')] remove one out of 2(!!!) from cart
+    @Test(testName = "Two Items in Cart")
+    public void addTwoItemsTest() {
+        driver.findElement(By.cssSelector("#add-to-cart-sauce-labs-bolt-t-shirt")).click();
+        driver.findElement(By.xpath("//a[@id='item_4_title_link']/following::button[contains(@name,'add-to-cart')]")).click();
+        driver.findElement(By.cssSelector("#shopping_cart_container")).click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='cart_contents_container' and @id='cart_contents_container']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='cart_item'][2]")).isDisplayed());
+    }
 
-    // //a[@id="about_sidebar_link"]/preceding::a    navig to product, burger - all items - click
+    @Test(testName = "Show all items")
+    public void allItemsBtn() throws InterruptedException {
+        driver.findElement(By.cssSelector("#shopping_cart_container")).click();
+        driver.findElement(By.cssSelector("#react-burger-menu-btn")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//a[@id='about_sidebar_link']/preceding::a")).click();
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
+    }
 
     @AfterMethod()
     public void quitBrowser() {
