@@ -20,7 +20,7 @@ public class ReadProperties {
     }
 
     public static String getBrowser(){
-        return properties.getProperty("browser");
+        return properties.getProperty("browser").toLowerCase();
     }
 
     public static int getTimeout(){
