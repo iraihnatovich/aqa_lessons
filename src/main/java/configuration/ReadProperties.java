@@ -15,10 +15,6 @@ public class ReadProperties {
         }
     }
 
-    public static String getUrl() {
-        return properties.getProperty("url");
-    }
-
     public static String getBrowser() {
         return properties.getProperty("browser").toLowerCase();
     }
