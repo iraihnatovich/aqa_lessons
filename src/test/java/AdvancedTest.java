@@ -66,7 +66,7 @@ public class AdvancedTest {
         driver.get("http://the-internet.herokuapp.com/download");
         WebElement downloadFile = wait.waitForVisibility(By.cssSelector("[href = 'download/profile.png']"));
         downloadFile.click();
-        Boolean isDownloaded = wait.fluentWaitForDownload();
+        Boolean isDownloaded = wait.fluentWaitForDownload(downloadFile.getText());
         System.out.println("Successful download: " + isDownloaded);
         File folder = new File(getDownloadPath());
         File[] folderContent = folder.listFiles();

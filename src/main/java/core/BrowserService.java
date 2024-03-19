@@ -41,12 +41,8 @@ public class BrowserService {
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--ignore-certificate-errors");
         chromeOptions.addArguments("--silent");
-        chromeOptions.addArguments("--incognito");
-        chromeOptions.addArguments("--headless");
         HashMap<String, Object> preference = new HashMap<>();
         preference.put("profile.default_content_settings.popups", 0);
-//        preference.put("download.prompt_for_download", false);
-//        preference.put("browser.set_download_behavior", "{ behavior: 'allow' , downloadPath: '"+getDownloadPath()+"'}");
         preference.put("download.default_directory", getDownloadPath());
         chromeOptions.setExperimentalOption("prefs", preference);
         return chromeOptions;

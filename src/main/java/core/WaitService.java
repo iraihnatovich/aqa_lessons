@@ -1,10 +1,7 @@
 package core;
 
 import configuration.ReadProperties;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
@@ -41,16 +38,14 @@ public class WaitService {
         return wait.until(ExpectedConditions.alertIsPresent());
     }
 
-    public Boolean fluentWaitForDownload() {
-        String path = getDownloadPath();
-        String name = "profile.png";
-        File targetFile = new File(path, name);
+    public Boolean fluentWaitForDownload(String fileName) {
+        File targetFile = new File(getDownloadPath(), fileName);
         Wait<File> fluent = new FluentWait<>(targetFile)
                 .withTimeout(Duration.ofSeconds(20))
-                .pollingEvery(Duration.ofMillis(2000))
-                .ignoring(Exception.class) // exact exception?
+                .pollingEvery(Duration.ofMillis(1000))
+                .ignoring(RuntimeException.class) // exact exception?
                 .withMessage("No such file");
-        return fluent.until(downloadedFile -> targetFile.exists() && targetFile.canRead());
+        return fluent.until(downloadedFile -> targetFile.exists());
     }
 
     public WebElement waitForElementWithText(By locator, String text) {
