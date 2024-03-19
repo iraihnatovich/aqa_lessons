@@ -1,0 +1,66 @@
+import core.BrowserService;
+import core.WaitService;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class AdvancedTest {
+    protected WebDriver driver;
+    protected WaitService wait;
+
+    @BeforeMethod
+    public void setup() {
+        driver = new BrowserService().getDriver();
+        wait = new WaitService(driver);
+    }
+
+    @Test(testName = "Context Menu")
+    public void ContextMenuTest() {
+        driver.get("http://the-internet.herokuapp.com/context_menu");
+        WebElement spot = wait.waitForVisibility(By.cssSelector("#hot-spot"));
+        Actions action = new Actions(driver);
+        action.contextClick(spot)
+                .build()
+                .perform();
+        Alert alert = wait.waitForAlert();
+        Assert.assertEquals(alert.getText(), "You selected a context menu");
+        alert.accept();
+    }
+
+
+    @Test(testName = "Dynamic Controls")
+    public void dynamicsTest() {
+        driver.get("http://the-internet.herokuapp.com/dynamic_controls");
+        wait.waitForVisibility(By.cssSelector("[onclick='swapCheckbox()']")).click();
+        wait.waitForVisibility(By.cssSelector("#message"));
+        Assert.assertTrue(wait.waitForInvisible(By.xpath("//button[text()='Remove']")));
+        WebElement input = wait.waitForVisibility(By.cssSelector("input"));
+        Assert.assertFalse(input.isEnabled());
+        wait.waitForVisibility(By.cssSelector("[onclick='swapInput()']")).click();
+        wait.waitForElementWithText(By.cssSelector("#message"), "It's enabled!");
+        Assert.assertTrue(input.isEnabled());
+    }
+
+    @Test (testName = "Upload")
+    public void uploadTest(){
+        driver.get("http://the-internet.herokuapp.com/upload");
+        WebElement uploadBtn = wait.waitForVisibility(By.cssSelector("#file-upload"));
+        String path = AdvancedTest.class.getClassLoader().getResource("streetTest.jpeg").getPath();
+        uploadBtn.sendKeys(path);
+        wait.waitForVisibility(By.cssSelector("#file-submit")).submit();
+        Assert.assertEquals(wait.waitForVisibility(By.cssSelector("#uploaded-files")).getText(), "streetTest.jpeg");
+
+    }
+
+    @AfterMethod
+    public void browserQuit() {
+        driver.quit();
+    }
+
+}
