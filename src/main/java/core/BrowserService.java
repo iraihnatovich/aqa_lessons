@@ -9,6 +9,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
+import java.io.File;
+import java.util.HashMap;
+
+import static configuration.ReadProperties.getDownloadPath;
+
 public class BrowserService {
     private WebDriver driver = null;
     private DriverManagerType driverManagerType;
@@ -37,6 +42,12 @@ public class BrowserService {
         chromeOptions.addArguments("--ignore-certificate-errors");
         chromeOptions.addArguments("--silent");
         chromeOptions.addArguments("--incognito");
+        chromeOptions.addArguments("--headless");
+        HashMap <String, Object> preference = new HashMap<>();
+        preference.put("profile.default_content_settings.popups", 0);
+//        preference.put("download.prompt_for_download", false);
+        preference.put("download.default_directory", getDownloadPath());
+        chromeOptions.setExperimentalOption("prefs", preference);
         return chromeOptions;
     }
 

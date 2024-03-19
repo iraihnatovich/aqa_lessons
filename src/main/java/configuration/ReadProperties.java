@@ -26,6 +26,9 @@ public class ReadProperties {
     public static int getTimeout(){
         return Integer.parseInt(properties.getProperty("timeout"));
     }
+    public static String getDownloadPath(){
+        return properties.getProperty("downloadDir");
+    }
     public static boolean isHeadless(){
         return properties.getProperty("headless").equalsIgnoreCase("true");
     }

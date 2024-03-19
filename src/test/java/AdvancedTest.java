@@ -10,6 +10,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.nio.file.Paths;
+
+import static configuration.ReadProperties.getDownloadPath;
+
 public class AdvancedTest {
     protected WebDriver driver;
     protected WaitService wait;
@@ -33,7 +38,6 @@ public class AdvancedTest {
         alert.accept();
     }
 
-
     @Test(testName = "Dynamic Controls")
     public void dynamicsTest() {
         driver.get("http://the-internet.herokuapp.com/dynamic_controls");
@@ -56,6 +60,30 @@ public class AdvancedTest {
         wait.waitForVisibility(By.cssSelector("#file-submit")).submit();
         Assert.assertEquals(wait.waitForVisibility(By.cssSelector("#uploaded-files")).getText(), "streetTest.jpeg");
 
+    }
+
+    @Test (testName = "Download")
+    public void downloadTest(){
+        driver.get("http://the-internet.herokuapp.com/download");
+        WebElement downloadFile = wait.waitForVisibility(By.cssSelector("[href = 'download/streetTest.jpeg']"));
+        downloadFile.click();
+       Boolean isSuccess = wait.fluentWaitForDownload();
+        System.out.println("Success download: "+isSuccess);
+        File folder = new File(getDownloadPath());
+        File [] folderContent = folder.listFiles();
+        boolean hasDownloadedFile = false;
+        for ( File fileFromFolder: folderContent) {
+            if (fileFromFolder.isFile()){
+                String fileName = fileFromFolder.getName();
+                System.out.println(fileName);
+                if(fileName.equals(downloadFile.getText())){
+                    File f = new File(fileName);
+                    hasDownloadedFile = true;
+                }
+            }
+        }
+        Assert.assertTrue(hasDownloadedFile);
+        folder.deleteOnExit();
     }
 
     @AfterMethod
