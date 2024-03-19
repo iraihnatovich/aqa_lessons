@@ -11,7 +11,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 import static configuration.ReadProperties.getDownloadPath;
 
@@ -51,8 +50,8 @@ public class AdvancedTest {
         Assert.assertTrue(input.isEnabled());
     }
 
-    @Test (testName = "Upload")
-    public void uploadTest(){
+    @Test(testName = "Upload")
+    public void uploadTest() {
         driver.get("http://the-internet.herokuapp.com/upload");
         WebElement uploadBtn = wait.waitForVisibility(By.cssSelector("#file-upload"));
         String path = AdvancedTest.class.getClassLoader().getResource("streetTest.jpeg").getPath();
@@ -62,28 +61,28 @@ public class AdvancedTest {
 
     }
 
-    @Test (testName = "Download")
-    public void downloadTest(){
+    @Test(testName = "Download")
+    public void downloadTest() {
         driver.get("http://the-internet.herokuapp.com/download");
-        WebElement downloadFile = wait.waitForVisibility(By.cssSelector("[href = 'download/streetTest.jpeg']"));
+        WebElement downloadFile = wait.waitForVisibility(By.cssSelector("[href = 'download/profile.png']"));
         downloadFile.click();
-       Boolean isSuccess = wait.fluentWaitForDownload();
-        System.out.println("Success download: "+isSuccess);
+        Boolean isDownloaded = wait.fluentWaitForDownload();
+        System.out.println("Successful download: " + isDownloaded);
         File folder = new File(getDownloadPath());
-        File [] folderContent = folder.listFiles();
+        File[] folderContent = folder.listFiles();
         boolean hasDownloadedFile = false;
-        for ( File fileFromFolder: folderContent) {
-            if (fileFromFolder.isFile()){
+        for (File fileFromFolder : folderContent) {
+            if (fileFromFolder.isFile()) {
                 String fileName = fileFromFolder.getName();
                 System.out.println(fileName);
-                if(fileName.equals(downloadFile.getText())){
-                    File f = new File(fileName);
+                if (fileName.equals(downloadFile.getText())) {
                     hasDownloadedFile = true;
                 }
             }
         }
         Assert.assertTrue(hasDownloadedFile);
         folder.deleteOnExit();
+        new File(getDownloadPath(), downloadFile.getText()).deleteOnExit();
     }
 
     @AfterMethod

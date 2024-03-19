@@ -5,31 +5,33 @@ import java.util.Properties;
 
 public class ReadProperties {
     private static Properties properties;
+
     static {
         properties = new Properties();
-        try{
+        try {
             properties.load(ReadProperties.class.getClassLoader().getResourceAsStream("config.properties"));
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static String getUrl(){
+    public static String getUrl() {
         return properties.getProperty("url");
     }
 
-    public static String getBrowser(){
+    public static String getBrowser() {
         return properties.getProperty("browser").toLowerCase();
     }
 
-    public static int getTimeout(){
+    public static int getTimeout() {
         return Integer.parseInt(properties.getProperty("timeout"));
     }
-    public static String getDownloadPath(){
+
+    public static String getDownloadPath() {
         return properties.getProperty("downloadDir");
     }
-    public static boolean isHeadless(){
+
+    public static boolean isHeadless() {
         return properties.getProperty("headless").equalsIgnoreCase("true");
     }
 }
