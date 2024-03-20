@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.*;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.List;
 
 import static configuration.ReadProperties.getDownloadPath;
 
@@ -29,6 +30,9 @@ public class WaitService {
     public WebElement waitForVisibility(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+    public List<WebElement> waitForVisibilityAllElements(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
 
     public boolean waitForInvisible(By locator) {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
@@ -43,7 +47,7 @@ public class WaitService {
         Wait<File> fluent = new FluentWait<>(targetFile)
                 .withTimeout(Duration.ofSeconds(20))
                 .pollingEvery(Duration.ofMillis(1000))
-                .ignoring(RuntimeException.class) // exact exception?
+                .ignoring(RuntimeException.class)
                 .withMessage("No such file");
         return fluent.until(downloadedFile -> targetFile.exists());
     }

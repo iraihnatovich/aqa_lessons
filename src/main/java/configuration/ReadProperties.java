@@ -24,7 +24,7 @@ public class ReadProperties {
     }
 
     public static String getDownloadPath() {
-        return properties.getProperty("downloadDir");
+        return ReadProperties.class.getClassLoader().getResource(properties.getProperty("downloadDir")).getPath();
     }
 
     public static boolean isHeadless() {

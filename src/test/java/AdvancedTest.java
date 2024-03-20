@@ -1,3 +1,4 @@
+import configuration.ReadProperties;
 import core.BrowserService;
 import core.WaitService;
 import org.openqa.selenium.Alert;
@@ -9,8 +10,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.io.File;
+import java.util.List;
 
 import static configuration.ReadProperties.getDownloadPath;
 
@@ -61,11 +62,13 @@ public class AdvancedTest {
 
     }
 
-    @Test(testName = "Download")
+    @Test(testName = "Download .png file")
     public void downloadTest() {
         driver.get("http://the-internet.herokuapp.com/download");
-        WebElement downloadFile = wait.waitForVisibility(By.cssSelector("[href = 'download/profile.png']"));
+        List<WebElement> targetFiles = wait.waitForVisibilityAllElements(By.xpath("//div[@class='example']/a[contains(@href, '.png')]"));
+        WebElement downloadFile = targetFiles.get(0);
         downloadFile.click();
+        System.out.println("File to download:  " + downloadFile.getText());
         Boolean isDownloaded = wait.fluentWaitForDownload(downloadFile.getText());
         System.out.println("Successful download: " + isDownloaded);
         File folder = new File(getDownloadPath());
@@ -84,6 +87,7 @@ public class AdvancedTest {
         folder.deleteOnExit();
         new File(getDownloadPath(), downloadFile.getText()).deleteOnExit();
     }
+
 
     @AfterMethod
     public void browserQuit() {
