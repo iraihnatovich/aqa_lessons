@@ -65,7 +65,7 @@ public class AdvancedTest {
     @Test(testName = "Download .png file")
     public void downloadTest() {
         driver.get("http://the-internet.herokuapp.com/download");
-        List<WebElement> targetFiles = wait.waitForVisibilityAllElements(By.xpath("//div[@class='example']/a[contains(@href, '.png')]"));
+        List<WebElement> targetFiles = wait.waitForVisibilityAllElements(By.xpath("//a[contains(@href, '.png')]"));
         WebElement downloadFile = targetFiles.get(0);
         downloadFile.click();
         System.out.println("File to download:  " + downloadFile.getText());
@@ -77,7 +77,6 @@ public class AdvancedTest {
         for (File fileFromFolder : folderContent) {
             if (fileFromFolder.isFile()) {
                 String fileName = fileFromFolder.getName();
-                System.out.println(fileName);
                 if (fileName.equals(downloadFile.getText())) {
                     hasDownloadedFile = true;
                 }
