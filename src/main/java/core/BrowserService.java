@@ -17,15 +17,16 @@ public class BrowserService {
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
                 WebDriverManager.chromedriver().setup();
-                ChromeDriver chromeDriver = new ChromeDriver(getChromeOPtions());
+                driver = new ChromeDriver(getChromeOPtions());
                 break;
             case "safari":
                 driverManagerType = DriverManagerType.SAFARI;
                 WebDriverManager.safaridriver().setup();
-                SafariDriver safariDriver = new SafariDriver();
+                driver = new SafariDriver();
                 break;
             default:
                 System.out.println(ReadProperties.getBrowser()+" isn't supported");
+                break;
         }
     }
 
