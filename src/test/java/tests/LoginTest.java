@@ -1,12 +1,12 @@
 package tests;
 
 import baseEntities.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
-    WebDriver driver;
 
     @Test
     public void testOne() throws InterruptedException {

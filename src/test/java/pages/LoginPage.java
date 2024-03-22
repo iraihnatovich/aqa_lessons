@@ -10,12 +10,14 @@ public class LoginPage extends BasePage {
     private final By usernameInputLocator = By.cssSelector("#user-name");
     private final By passwordInputLocator = By.cssSelector("#password");
     private final By loginButtonLocator = By.cssSelector("#login-button");
-    protected WebDriver driver;
 
     //initialization block
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+//    public LoginPage(WebDriver driver) {
+//        this.driver = driver;
+//    }
 
     //methods
     public WebElement getUsernameInput(){

@@ -1,3 +1,4 @@
+/*
 package services;
 
 import configuration.ReadProperties;
@@ -12,11 +13,13 @@ public class BrowserService {
     private WebDriver driver = null;
     private DriverManagerType driverManagerType;
 
-    public BrowserService(){
-        switch (ReadProperties.getBrowser()){
+    public BrowserService() {
+        switch (ReadProperties.getBrowser()) {
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.getInstance(driverManagerType).setup();
+//                WebDriverManager.getInstance(driverManagerType).setup();
+                WebDriverManager.chromedriver().clearDriverCache().setup();
+                WebDriverManager.chromedriver().clearResolutionCache().setup();
                 driver = new ChromeDriver(getChromeOptions());
                 break;
             case "safari":
@@ -25,12 +28,12 @@ public class BrowserService {
                 driver = new SafariDriver();
                 break;
             default:
-                System.out.println(ReadProperties.getBrowser()+" isn't supported");
+                System.out.println(ReadProperties.getBrowser() + " isn't supported");
                 break;
         }
     }
 
-    private ChromeOptions getChromeOptions(){
+    private ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--ignore-certificate-errors");
@@ -40,9 +43,9 @@ public class BrowserService {
         return chromeOptions;
     }
 
-    public WebDriver getDriver (){
+    public WebDriver getDriver() {
         driver.manage().deleteAllCookies();
 //        driver.manage().window().maximize();
         return driver;
     }
-}
+}*/
