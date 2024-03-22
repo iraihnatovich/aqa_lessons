@@ -16,7 +16,7 @@ public class BrowserService {
         switch (ReadProperties.getBrowser()){
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.getInstance(driverManagerType).setup();
                 driver = new ChromeDriver(getChromeOptions());
                 break;
             case "safari":
@@ -41,6 +41,8 @@ public class BrowserService {
     }
 
     public WebDriver getDriver (){
+        driver.manage().deleteAllCookies();
+//        driver.manage().window().maximize();
         return driver;
     }
 }
