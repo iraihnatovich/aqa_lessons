@@ -35,7 +35,7 @@ public class BrowserService {
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--ignore-certificate-errors");
         chromeOptions.addArguments("--silent");
-        chromeOptions.addArguments("--incognito"); //???????
+        chromeOptions.addArguments("--incognito");
         return chromeOptions;
     }
 
