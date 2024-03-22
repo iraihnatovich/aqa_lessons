@@ -9,6 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -31,7 +32,7 @@ public class HerokuAppTest {
         driverWait.waitForVisibility(By.cssSelector("a[href='/iframe']")).click();
         WebElement frameUnderTest = driverWait.waitForVisibility(By.cssSelector("iframe[id='mce_0_ifr']"));
         driver.switchTo().frame(frameUnderTest);
-        Assert.assertEquals(driver.findElement(By.cssSelector("p")).getText(), "Your content goes here.");
+        Assert.assertEquals(driverWait.waitForVisibility(By.cssSelector("p")).getText(), "Your content goes here.");
     }
 
     @Test
