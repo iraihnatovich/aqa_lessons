@@ -15,7 +15,7 @@ import steps.NavigationSteps;
 import steps.ProductSteps;
 
 public class EndToEndTest extends BaseTest {
-    @Test
+    @Test (testName = "e2e Adding product to cart")
     public void e2eTest(@Optional("John") String firstName,
                         @Optional("Doe") String lastName,
                         @Optional("123432") String zipcode) {
