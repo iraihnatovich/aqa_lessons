@@ -34,6 +34,7 @@ public class EndToEndTest extends BaseTest {
         checkoutSteps.finishCheckout();
         CheckoutCompletePage checkoutCompletePage = new CheckoutCompletePage(driver);
         Assert.assertTrue(checkoutCompletePage.isPageOpened());
+        Assert.assertEquals(checkoutCompletePage.getTitleText(), "Checkout: Complete!");
         Assert.assertEquals(checkoutCompletePage.getCompleteHeaderText(),
                 "Thank you for your order!");
         Assert.assertEquals(checkoutCompletePage.getCompleteMessageText(),

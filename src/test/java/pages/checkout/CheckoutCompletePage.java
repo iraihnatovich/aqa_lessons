@@ -9,7 +9,7 @@ public class CheckoutCompletePage extends BasePage {
     private final By completeHeaderLocator = By.cssSelector(".complete-header");
     private final By completeMessageLocator = By.cssSelector(".complete-text");
     private final By backButtonLocator = By.cssSelector("#back-to-products");
-
+    private final By completeTitleLocator = By.cssSelector(".title");
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
     }
@@ -42,4 +42,13 @@ public class CheckoutCompletePage extends BasePage {
     public boolean hasBackButton() {
         return getBackButton().isDisplayed();
     }
+
+    public WebElement getCompleteTitle(){
+        return wait.waitForVisibilityLocatedBy(completeTitleLocator);
+    }
+
+    public String getTitleText(){
+        return getCompleteTitle().getText();
+    }
+
 }
