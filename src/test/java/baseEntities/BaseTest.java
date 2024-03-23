@@ -1,27 +1,22 @@
 package baseEntities;
 
+import configuration.ReadProperties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import services.AdvancedDriver;
-
+import services.BrowserService;
 
 public class BaseTest {
-    protected WebDriver driver ;
-//    private WaitService waitDriver;
-protected AdvancedDriver advancedDriver;
+    protected WebDriver driver;
 
     @BeforeMethod
-    public void setup(){
-//        driver = new BrowserService().getDriver();
-//        waitDriver = new WaitService(driver);
-        advancedDriver = new AdvancedDriver();
-         driver = advancedDriver.getDriver();
-         driver.get("https://www.saucedemo.com/");
-
+    public void setup() {
+        driver = new BrowserService().getDriver();
+        driver.get(ReadProperties.getUrl());
     }
+
     @AfterMethod
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 

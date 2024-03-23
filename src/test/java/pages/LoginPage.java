@@ -6,28 +6,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
-    //locator description (By emailInputLocator)
     private final By usernameInputLocator = By.cssSelector("#user-name");
     private final By passwordInputLocator = By.cssSelector("#password");
     private final By loginButtonLocator = By.cssSelector("#login-button");
 
-    //initialization block
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-//    public LoginPage(WebDriver driver) {
-//        this.driver = driver;
-//    }
 
-    //methods
-    public WebElement getUsernameInput(){
-        return driver.findElement(usernameInputLocator);
+    @Override
+    protected By getPageIdentifier() {
+        return usernameInputLocator;
     }
-    public WebElement getPasswordInput(){
-        return driver.findElement(passwordInputLocator);
+
+    public WebElement getUsernameInput() {
+        return wait.waitForVisibilityLocatedBy(usernameInputLocator);
     }
-    public WebElement getLoginButton(){
-        return driver.findElement(loginButtonLocator);
+
+    public WebElement getPasswordInput() {
+        return wait.waitForVisibilityLocatedBy(passwordInputLocator);
+    }
+
+    public WebElement getLoginButton() {
+        return wait.waitForVisibilityLocatedBy(loginButtonLocator);
     }
 
 }

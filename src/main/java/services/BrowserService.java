@@ -1,4 +1,4 @@
-/*
+
 package services;
 
 import configuration.ReadProperties;
@@ -17,9 +17,7 @@ public class BrowserService {
         switch (ReadProperties.getBrowser()) {
             case "chrome":
                 driverManagerType = DriverManagerType.CHROME;
-//                WebDriverManager.getInstance(driverManagerType).setup();
-                WebDriverManager.chromedriver().clearDriverCache().setup();
-                WebDriverManager.chromedriver().clearResolutionCache().setup();
+                WebDriverManager.getInstance(driverManagerType).setup();
                 driver = new ChromeDriver(getChromeOptions());
                 break;
             case "safari":
@@ -48,4 +46,4 @@ public class BrowserService {
 //        driver.manage().window().maximize();
         return driver;
     }
-}*/
+}
