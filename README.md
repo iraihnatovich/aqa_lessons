@@ -25,16 +25,16 @@ E2E тест-сценарий (позитивный)
 
 Отображаются следующие элементы:
 
-Тайтл страницы:
-Checkout: Complete!
+* Тайтл страницы: "Checkout: Complete!"
 
-Текст на страницы (хэдер):
-Thank you for your order!
+* Текст на страницы (хэдер):
+"Thank you for your order!"
 
-Сообщение на странице:
-Your order has been dispatched, and will arrive just as fast as the pony can get there!
+* Сообщение на странице:
+"Your order has been dispatched, and 
+will arrive just as fast as the pony can get there!"
 
-Кнопка: Back Home
+* Кнопка: Back Home
 
 
 
