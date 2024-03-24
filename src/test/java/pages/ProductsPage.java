@@ -1,6 +1,7 @@
 package pages;
 
 import baseEntities.BasePage;
+import configuration.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,7 @@ public class ProductsPage extends BasePage {
     private final By productItemLocator = By.cssSelector(".inventory_item");
     private final By addButtonLocator = By.cssSelector(".btn_inventory");
     private final By cartButtonLocator = By.cssSelector("#shopping_cart_container");
+    private final String pagePath = "inventory.html";
 
     private final int amountOfItemsPerPage = 6;
 
@@ -21,6 +23,11 @@ public class ProductsPage extends BasePage {
     @Override
     protected By getPageIdentifier() {
         return productItemLocator;
+    }
+
+    @Override
+    public String getPageUrl() {
+        return ReadProperties.getUrl()+pagePath;
     }
 
     public boolean isPageOpened() {

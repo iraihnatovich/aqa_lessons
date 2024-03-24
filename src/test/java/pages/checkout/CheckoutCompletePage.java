@@ -1,6 +1,7 @@
 package pages.checkout;
 
 import baseEntities.BasePage;
+import configuration.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ public class CheckoutCompletePage extends BasePage {
     private final By completeMessageLocator = By.cssSelector(".complete-text");
     private final By backButtonLocator = By.cssSelector("#back-to-products");
     private final By completeTitleLocator = By.cssSelector(".title");
+    private final String pagePath = "checkout-complete.html";
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
     }
@@ -17,6 +19,11 @@ public class CheckoutCompletePage extends BasePage {
     @Override
     protected By getPageIdentifier() {
         return completeHeaderLocator;
+    }
+
+    @Override
+    public String getPageUrl() {
+        return ReadProperties.getUrl()+pagePath;
     }
 
     public WebElement getCompleteMessage() {
