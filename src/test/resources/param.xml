@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parameters Suite">
+    <parameter name="firstName-param" value="Jane"/>
+    <parameter name="lastName-param" value="Doe"/>
+    <parameter name="code-param" value="437541"/>
+    <test name="Param tests">
+        <classes>
+            <class name="tests.EndToEndTest"/>
+        </classes>
+    </test>
+</suite>
