@@ -4,6 +4,7 @@ import baseEntities.BaseTest;
 import configuration.ReadProperties;
 import org.testng.Assert;
 import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.ProductsPage;
@@ -15,6 +16,7 @@ import steps.NavigationSteps;
 import steps.ProductSteps;
 
 public class EndToEndTest extends BaseTest {
+    @Parameters({"firstName-param","lastName-param","code-param"})
     @Test (testName = "e2e Adding to cart and checkout")
     public void e2eTest(@Optional("John") String firstName,
                         @Optional("Doe") String lastName,
