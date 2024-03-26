@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.util.List;
 
@@ -70,20 +71,7 @@ public class AdvancedTest {
         downloadFile.click();
         System.out.println("File to download:  " + downloadFile.getText());
         Boolean isDownloaded = wait.fluentWaitForDownload(downloadFile.getText());
-        System.out.println("Successful download: " + isDownloaded);
-        File folder = new File(getDownloadPath());
-        File[] folderContent = folder.listFiles();
-        boolean hasDownloadedFile = false;
-        for (File fileFromFolder : folderContent) {
-            if (fileFromFolder.isFile()) {
-                String fileName = fileFromFolder.getName();
-                if (fileName.equals(downloadFile.getText())) {
-                    hasDownloadedFile = true;
-                }
-            }
-        }
-        Assert.assertTrue(hasDownloadedFile);
-        folder.deleteOnExit();
+        Assert.assertTrue(isDownloaded);
         new File(getDownloadPath(), downloadFile.getText()).deleteOnExit();
     }
 

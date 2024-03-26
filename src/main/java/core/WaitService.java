@@ -49,7 +49,7 @@ public class WaitService {
                 .pollingEvery(Duration.ofMillis(1000))
                 .ignoring(RuntimeException.class)
                 .withMessage("No such file");
-        return fluent.until(downloadedFile -> targetFile.exists());
+        return fluent.until(isDownloaded -> targetFile.exists());
     }
 
     public WebElement waitForElementWithText(By locator, String text) {
